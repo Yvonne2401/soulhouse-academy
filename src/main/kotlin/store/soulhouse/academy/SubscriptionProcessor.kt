@@ -13,7 +13,7 @@ class SubscriptionProcessor {
 
     @CommandHandler
     fun handle(command: RegisterSubscription, @InjectEntity(idProperty = "email") customerSubscription: CustomerSubscription?, eventAppender: EventAppender) {
-        if (customerSubscription == null) {
+        customerSubscription ?:
             eventAppender.append(
                 CustomerRegistered(
                     email = command.email,
@@ -21,7 +21,7 @@ class SubscriptionProcessor {
                 )
             )
             println("Customer with email: ${command.email} registered")
-        }
+
         customerSubscription?.let {
                 println("IMHO this should always be printed")
         }

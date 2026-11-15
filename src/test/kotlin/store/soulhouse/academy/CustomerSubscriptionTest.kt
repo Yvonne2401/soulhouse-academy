@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.boot.test.system.CapturedOutput
 import org.springframework.boot.test.system.OutputCaptureExtension
-import org.springframework.test.context.junit.jupiter.SpringExtension
 import java.math.BigDecimal
 import java.time.LocalDate
 import java.util.UUID
@@ -27,7 +26,7 @@ class CustomerSubscriptionTest {
 
     @BeforeEach
     fun beforeEach() {
-        var configurer = EventSourcingConfigurer.create().registerEntity(EventSourcedEntityModule.autodetected(String::class.java,
+        val configurer = EventSourcingConfigurer.create().registerEntity(EventSourcedEntityModule.autodetected(String::class.java,
             CustomerSubscription::class.java)).messaging { messaging ->
             messaging.registerCommandHandlingModule(
                 CommandHandlingModule.named("subscription-processor")
